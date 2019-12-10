@@ -1,55 +1,46 @@
 const express = require('express');
 const router = express.Router();
-const checkAuth = require('../middleware/auth')
 
-router.post('/', checkAuth, (request, response) => {
-    const createTask = {
-        status: 201,
-        message: 'Created successfully'
-    };
+const TaskService = require('../services/TaskService');
+const checkAuth = require('../middleware/auth');
+const notFound = require('../middleware/not-found')
+
+router.post('/', checkAuth, async (request, response) => {
+    const createTask = await TaskService.add(request.body);
     response
         .status(201)
         .json(createTask);
 });
 
-router.get('/', checkAuth, (request, response) => {
-    const tasks = {
-        status: 200,
-        message: 'Get all tasks'
-    };
-    response
-        .status(200)
-        .json(tasks);
+router.get('/', checkAuth, async (request, response) => {
+    const tasks = await TaskService.getAll();
+    tasks 
+        ? response.status(200).json(tasks)
+        : response.status(204).end();
 });
 
-router.get('/:taskId', checkAuth, (request, response) => {
-    const task = {
-        status: 200,
-        message: 'Get task' + request.params.taskId
-    };
-    response
-        .status(200)
-        .json(task);
+router.get('/:taskId', checkAuth, async (request, response) => {
+    const task = await TaskService.getById(request.params.taskId);
+    task
+        ? response.json(task)
+        : notFound(request, response);
 });
 
-router.patch('/:taskId', checkAuth, (request, response) => {
-    const updateTask = {
-        status: 200,
-        message: 'Update task' + request.params.taskId
-    };
-    response
-        .status(200)
-        .json(updateTask);
+router.patch('/:taskId', checkAuth, async (request, response) => {
+    const updatedTask = await TaskService.update(
+        request.params.taskId,
+        request.body
+      );
+      updatedTask
+        ? response.json(updatedTask)
+        : notFound(request, response);
 });
 
-router.delete('/:taskId', checkAuth, (request, response) => {
-    const deleteTask = {
-        status: 200,
-        message: 'Delete task' + request.params.taskId
-    };
-    response
-        .status(200)
-        .json(deleteTask);
+router.delete('/:taskId', checkAuth, async (request, response) => {
+    const isDeleted = await TaskService.delete(request.params.taskId);
+    isDeleted
+        ? response.end()
+        : notFound(request, response)
 });
 
 module.exports = router;
