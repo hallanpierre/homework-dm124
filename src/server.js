@@ -7,4 +7,4 @@ const port = process.env.PORT || 3000;
 http.createServer(app)
     .listen(port, () => {
         console.log(`Server up on http://${host}:${port}`);
-    })
+    });
