@@ -1,24 +1,29 @@
+const Delivery = require('../model/Delivery')
+
 const db = {};
 let sequence = 0;
 
-class TaskService {
-    static add(newTask) {
+class DeliveryService {
+    static add(newDelivery) {
         return new Promise((resolve) => {
-            const task = {
-                id: ++sequence,
-                done: newTask.done || false,
-                description: newTask.description
-            };
-            db[task.id] = task;
-            resolve(task);
+            const delivery = new Delivery(++sequence, 
+                newDelivery.orderId, 
+                newDelivery.idClient, 
+                newDelivery.receiverName,
+                newDelivery.receiverCpf,
+                newDelivery.isBuyer,
+                newDelivery.dateTimeDelivery,
+                newDelivery.location);
+            db[delivery.id] = delivery;
+            resolve(delivery);
         });
     }
 
     static getAll() {
         const toArray = key => db[key];
         return new Promise((resolve) => {
-            const tasks = Object.keys(db).map(toArray);
-            resolve(tasks);
+            const deliveries = Object.keys(db).map(toArray);
+            resolve(deliveries);
         });
     }
 
@@ -43,8 +48,8 @@ class TaskService {
 
     static delete(id) {
         return new Promise((resolve) => {
-            const task = db[id];
-            if (task) {
+            const delivery = db[id];
+            if (delivery) {
                 delete db[id];
                 resolve(true);
             }
@@ -53,4 +58,4 @@ class TaskService {
     }
 }
 
-module.exports = TaskService;
+module.exports = DeliveryService;

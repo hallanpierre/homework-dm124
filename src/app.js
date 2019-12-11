@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Routes
 const taskRouter = require('./routes/tasks');
-app.use('/api/tasks', taskRouter);
+app.use('/api/delivery', taskRouter);
 
 app.use(notFound);
 

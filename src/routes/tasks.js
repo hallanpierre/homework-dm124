@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const TaskService = require('../services/TaskService');
+const TaskService = require('../services/DeliveryService');
 const checkAuth = require('../middleware/auth');
 const notFound = require('../middleware/not-found')
 
@@ -19,16 +19,16 @@ router.get('/', checkAuth, async (request, response) => {
         : response.status(204).end();
 });
 
-router.get('/:taskId', checkAuth, async (request, response) => {
-    const task = await TaskService.getById(request.params.taskId);
+router.get('/:deliveryId', checkAuth, async (request, response) => {
+    const task = await TaskService.getById(request.params.deliveryId);
     task
         ? response.json(task)
         : notFound(request, response);
 });
 
-router.patch('/:taskId', checkAuth, async (request, response) => {
+router.patch('/:deliveryId', checkAuth, async (request, response) => {
     const updatedTask = await TaskService.update(
-        request.params.taskId,
+        request.params.deliveryId,
         request.body
       );
       updatedTask
@@ -36,8 +36,8 @@ router.patch('/:taskId', checkAuth, async (request, response) => {
         : notFound(request, response);
 });
 
-router.delete('/:taskId', checkAuth, async (request, response) => {
-    const isDeleted = await TaskService.delete(request.params.taskId);
+router.delete('/:deliveryId', checkAuth, async (request, response) => {
+    const isDeleted = await TaskService.delete(request.params.deliveryId);
     isDeleted
         ? response.end()
         : notFound(request, response)
