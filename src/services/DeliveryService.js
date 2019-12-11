@@ -1,7 +1,9 @@
 const Delivery = require('../model/Delivery')
 
+const user = process.env.USER || 'user';
+const password = process.env.PASSWORD || 'mongodb';
 const mongo = require('mongodb').MongoClient;
-const url = 'mongodb+srv://user:mongodb@cluster0-otdkl.mongodb.net/dm124-databse';
+const url = `mongodb+srv://${user}:${password}@cluster0-otdkl.mongodb.net/dm124-databse`;
 
 let db;
 let sequence = 0;
@@ -37,9 +39,7 @@ class DeliveryService {
 
             db.collection('delivery').save(delivery, (err, result) => {
                 if (err) return console.log(err);
-
-                console.log('Created successfully');
-                resolve(result.map(mapDelivery));
+                resolve(delivery);
             });
         });
     }
