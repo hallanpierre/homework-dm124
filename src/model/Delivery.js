@@ -2,7 +2,7 @@ class Delivery {
     constructor(
                 id, 
                 orderId, 
-                clienteId, 
+                clientId, 
                 receiverName,
                 receiverCpf,
                 isBuyer,
@@ -10,7 +10,7 @@ class Delivery {
                 location) {
         this.id = id, 
         this.orderId = orderId, 
-        this.clienteId = clienteId, 
+        this.clientId = clientId, 
         this.receiverName = receiverName,
         this.receiverCpf = receiverCpf,
         this.isBuyer = isBuyer,

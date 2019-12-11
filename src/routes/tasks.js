@@ -3,7 +3,7 @@ const router = express.Router();
 
 const TaskService = require('../services/DeliveryService');
 const checkAuth = require('../middleware/auth');
-const notFound = require('../middleware/not-found')
+const notFound = require('../middleware/not-found');
 
 router.post('/', checkAuth, async (request, response) => {
     const createTask = await TaskService.add(request.body);
@@ -31,7 +31,7 @@ router.patch('/:deliveryId', checkAuth, async (request, response) => {
         request.params.deliveryId,
         request.body
       );
-      updatedTask
+    updatedTask
         ? response.json(updatedTask)
         : notFound(request, response);
 });

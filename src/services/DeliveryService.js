@@ -1,59 +1,106 @@
 const Delivery = require('../model/Delivery')
 
-const db = {};
+const mongo = require('mongodb').MongoClient;
+const url = 'mongodb+srv://user:mongodb@cluster0-otdkl.mongodb.net/dm124-databse';
+
+let db;
 let sequence = 0;
 
+mongo.connect(url, (err, client) => {
+    if (err) return console.log(err);
+    db = client.db('dm124-database');
+});
+
+const mapDelivery = delivery => {
+    return new Delivery(delivery.id, 
+        delivery.orderId, 
+        delivery.clientId, 
+        delivery.receiverName,
+        delivery.receiverCpf,
+        delivery.isBuyer,
+        delivery.dateTimeDelivery,
+        delivery.location);
+};
+
 class DeliveryService {
+
     static add(newDelivery) {
         return new Promise((resolve) => {
             const delivery = new Delivery(++sequence, 
                 newDelivery.orderId, 
-                newDelivery.idClient, 
+                newDelivery.clientId, 
                 newDelivery.receiverName,
                 newDelivery.receiverCpf,
                 newDelivery.isBuyer,
                 newDelivery.dateTimeDelivery,
                 newDelivery.location);
-            db[delivery.id] = delivery;
-            resolve(delivery);
+
+            db.collection('delivery').save(delivery, (err, result) => {
+                if (err) return console.log(err);
+
+                console.log('Created successfully');
+                resolve(result.map(mapDelivery));
+            });
         });
     }
 
     static getAll() {
-        const toArray = key => db[key];
         return new Promise((resolve) => {
-            const deliveries = Object.keys(db).map(toArray);
-            resolve(deliveries);
+            db.collection('delivery').find().toArray((err, results) => {
+                if (err) return console.log(err);
+                resolve(results.map(mapDelivery));
+            });
         });
     }
 
     static getById(id) {
         return new Promise((resolve) => {
-            resolve(db[id]);
+            const query = { "id": Number(id) };
+            db.collection('delivery').find(query).toArray((err, result) => {
+                if (err) return console.log(err);
+                resolve(result.map(mapDelivery)[0]);
+            });
         });
     }
 
-    static update(taskId, updatedTask) {
+    static update(deliveryId, updatedDelivery) {
         return new Promise(async (resolve) => {
-            const task = await TaskService.getById(taskId);
-            if (task) {
-                const hasValue = updatedTask.done != null;
-                task.done = hasValue ? updatedTask.done : task.done;
-                task.description = updatedTask.description || TaskService.description;
-                resolve(task);
+            const query = {
+                id: Number(deliveryId)
             }
-            resolve(null);
+            const delivery = await DeliveryService.getById(deliveryId);
+            if (delivery) {
+                delivery.receiverName = updatedDelivery.receiverName || delivery.receiverName;
+                delivery.receiverCpf = updatedDelivery.receiverCpf || delivery.receiverCpf;
+                delivery.isBuyer = updatedDelivery.isBuyer || delivery.isBuyer;
+                delivery.dateTimeDelivery = updatedDelivery.dateTimeDelivery || delivery.dateTimeDelivery;
+                delivery.location = updatedDelivery.location || delivery.location;
+                db.collection('delivery').replaceOne(query, delivery, (err, result) => {
+                    if (err) return console.log(err);
+                    resolve(delivery);
+                });
+            }
+            else {
+                resolve(null);
+            }
         });
     }
 
-    static delete(id) {
-        return new Promise((resolve) => {
-            const delivery = db[id];
-            if (delivery) {
-                delete db[id];
-                resolve(true);
+    static delete(deliveryId) {
+        return new Promise(async (resolve) => {
+            const query = {
+                id: Number(deliveryId)
             }
-            resolve(false);
+            const delivery = await DeliveryService.getById(deliveryId);
+            console.log(delivery);
+            if (delivery) {
+                db.collection('delivery').deleteOne(query, (err, result) => {
+                    if (err) return console.log(err);
+                    resolve(true);
+                });
+            } else {
+                resolve(false);
+            }
         });
     }
 }
