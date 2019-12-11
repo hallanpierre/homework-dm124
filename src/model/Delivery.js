@@ -7,7 +7,6 @@ class Delivery {
                 isBuyer,
                 dateTimeDelivery,
                 location) {
-        this.id = id, 
         this.orderId = orderId, 
         this.clientId = clientId, 
         this.receiverName = receiverName,

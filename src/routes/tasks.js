@@ -5,18 +5,22 @@ const TaskService = require('../services/DeliveryService');
 const checkAuth = require('../middleware/auth');
 const notFound = require('../middleware/not-found');
 
+const HttpStatusOk = 200;
+const HttpStatusCreated = 201;
+const HttpStatusNotContent = 204;
+
 router.post('/', checkAuth, async (request, response) => {
     const createTask = await TaskService.add(request.body);
     response
-        .status(201)
+        .status(HttpStatusCreated)
         .json(createTask);
 });
 
 router.get('/', checkAuth, async (request, response) => {
     const tasks = await TaskService.getAll();
     tasks 
-        ? response.status(200).json(tasks)
-        : response.status(204).end();
+        ? response.status(HttpStatusOk).json(tasks)
+        : response.status(HttpStatusNotContent).end();
 });
 
 router.get('/:deliveryId', checkAuth, async (request, response) => {
