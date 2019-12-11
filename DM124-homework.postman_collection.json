@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "e708b635-23e2-4451-aa4e-4e0249e62437",
+		"name": "DM124-homework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Delivery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "/ZG0xMjQ6YWx1bm9pbmF0ZWw=/",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"orderId\": 3,\r\n    \"idClient\": 1,\r\n    \"receiverName\": \"Hallan\",\r\n    \"receiverCpf\": \"123.123.123-12\",\r\n    \"isBuyer\": false,\r\n    \"dateTimeDelivery\": \"2019-12-11T14:43:37+0100\",\r\n    \"location\": \"12 12 12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/delivery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"delivery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all deliveries",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "/ZG0xMjQ6YWx1bm9pbmF0ZWw=/",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/delivery/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"delivery",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update delivery",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "/ZG0xMjQ6YWx1bm9pbmF0ZWw=/",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"receiverName\": \"nome nome\",\r\n    \"receiverCpf\": \"000.000.000-00\",\r\n    \"isBuyer\": false,\r\n    \"location\": \"00 00 00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/delivery/5df1304bad223143b0eacaf8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"delivery",
+						"5df1304bad223143b0eacaf8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleve delivery",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "/ZG0xMjQ6YWx1bm9pbmF0ZWw=/",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/delivery/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"delivery",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
