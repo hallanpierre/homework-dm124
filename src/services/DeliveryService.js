@@ -23,7 +23,8 @@ class DeliveryService {
                 newDelivery.receiverCpf,
                 newDelivery.isBuyer,
                 newDelivery.dateTimeDelivery,
-                newDelivery.location);
+                newDelivery.location,
+                newDelivery.status || 'PENDENTE');
 
             db.collection('delivery').save(delivery, (err, result) => {
                 if (err) return console.log(err);
