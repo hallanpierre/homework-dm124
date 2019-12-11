@@ -1,6 +1,5 @@
 class Delivery {
-    constructor(
-                id, 
+    constructor( 
                 orderId, 
                 clientId, 
                 receiverName,
