@@ -44,7 +44,8 @@ class DeliveryService {
 
     static getById(id) {
         return new Promise((resolve) => {
-            db.collection('delivery').find(id).toArray((err, result) => {
+            const query = { _id: ObjectID(id) };
+            db.collection('delivery').find(query).toArray((err, result) => {
                 if (err) return console.log(err);
                 resolve(result[0]);
             });
@@ -57,9 +58,9 @@ class DeliveryService {
             const newValues = { $set: updatedDelivery };
             db.collection('delivery').updateOne(query, newValues, (err, result) => {
                 if (err) return console.log(err);
-                resolve(true);
+                const delivery = DeliveryService.getById(id);
+                resolve(delivery);
             });
-            
         });
     }
 
