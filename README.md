@@ -10,15 +10,15 @@ To help you, there is a postman collection with all the endpoints in root of thi
 
 ## How to install
 
-1 - Download this project.
-2 - Open a terminal in the project folder.
-3 - Run the command 'npm install' to install all dependencies.
+- Download this project.
+- Open a terminal in the project folder.
+- Run the command 'npm install' to install all dependencies.
 
 ## How to run
 
-1 - Open a terminal in the project folder.
-2 - Run the command 'npm start'.
-3 - The url 'http://localhost:3000' is available to use in endpoints.
+- Open a terminal in the project folder.
+- Run the command 'npm start'.
+- The url 'http://localhost:3000' is available to use in endpoints.
 
 ## Endpoints
 
