@@ -29,7 +29,7 @@ For this, Base Auth (username: dm124, password: alunoinatel)
 
 ```bash
 POST
-http://url/api/delivery
+url/api/delivery
 Content-Type: application/json
 
 Body:
@@ -65,7 +65,7 @@ Body:
 #### List Deliveries
 ```bash
 GET
-http://url/api/delivery
+url/api/delivery
 Content-Type: application/json
 
 Response (200 OK):
@@ -100,7 +100,7 @@ Body:
 
 ```bash
 GET
-http://url/api/delivery/<deliveryId>
+url/api/delivery/<deliveryId>
 Content-Type: application/json
 
 Response (200 OK):
@@ -122,7 +122,7 @@ Body:
 
 ```bash
 PATCH
-http://url/api/delivery/<deliveryId>
+url/api/delivery/<deliveryId>
 Content-Type: application/json
 
 Body:
@@ -150,7 +150,7 @@ Body:
 
 ```bash
 DELETE
-http://url/api/delivery/<orderId>
+url/api/delivery/<orderId>
 Content-Type: application/json
 
 Response (200 OK):
