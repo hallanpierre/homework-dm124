@@ -1,12 +1,10 @@
 # DM124 - POSTGRATUATE - INATEL 
 Mobile Development and Cloud Computing
 
-## The API is available to use on the internet
-You can test api on the internet using the url below:
-http://dm124-pierre.ddns.net
+## The API is available to use in the internet
+You can test api in the internet using the url http://dm124-pierre.ddns.net.
 
-If you have problem with url above, you can test using the url below:
-https://mighty-castle-73044.herokuapp.com
+If you have problem with url above, you can test using the url https://mighty-castle-73044.herokuapp.com.
 
 There are five endpoints to use the API, explain above.
 To help you, there is a postman collection with all the endpoints in root of this project.
