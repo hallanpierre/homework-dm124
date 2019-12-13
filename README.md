@@ -1,8 +1,11 @@
-# DM124 - POSTGRATUATE - INATEL
+# DM124 - POSTGRATUATE - INATEL 
 Mobile Development and Cloud Computing
 
 ## The API is available to use on the internet
-You can test api on the internet using the url above:
+You can test api on the internet using the url below:
+http://dm124-pierre.ddns.net
+
+If you have problem with url above, you can test using the url below:
 https://mighty-castle-73044.herokuapp.com
 
 There are five endpoints to use the API, explain above.
@@ -18,7 +21,7 @@ To help you, there is a postman collection with all the endpoints in root of thi
 
 - Open a terminal in the project folder.
 - Run the command 'npm start'.
-- The url 'http://localhost:3000' is available to use in endpoints.
+- The url 'http://localhost:8080' is available to use in endpoints.
 
 ## Endpoints
 
